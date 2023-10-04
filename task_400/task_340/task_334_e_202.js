@@ -12,43 +12,24 @@ n = 19
 
 var isHappy = function (n) {
 
-    let digits = [];
-
-
-    digits = n.toString().split('').map(Number);
-
-
-    function sumSquare(digits) {
-        let sum = 0;
-        console.log(digits)
-        for (const item of digits) {
-            // console.log('------------')
-            console.log(item)
-            sum += item * item;
-            console.log(sum)
-            if (sum === 1) return true;
+    const hash = new Set();
+    function helper(n) {
+        let digits = n.toString().split('').map(item => item * item);
+        let sum = digits.reduce((acc, item) => acc + item, 0);
+        console.log(digits + ' - digits')
+        if (sum === 1) {
+            console.log('++++++++++++')
+            return true;
         }
-
-        digits = sum.toString().split('').map(Number);
-        sumSquare(digits)
-    }
-
-
-    try {
-        sumSquare(digits); // Рекурсивный вызов
-    } catch (e) {
-        if (e instanceof RangeError) {
-            console.error("Стек вызовов рекурсии переполнен.");
+        if (hash.has(sum)) {
+            return false;
         } else {
-            throw e; // Если это не ошибка переполнения стека, выбрасываем ее дальше
+            hash.add(sum);
+            return helper(sum)
         }
+        //return helper(n);
     }
-
-
-
-
-    console.log(digits)
-
+    return helper(n);
 };
 
 console.log(isHappy(n))
