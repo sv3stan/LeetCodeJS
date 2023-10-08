@@ -12,35 +12,48 @@
 
 s = "barfoothefoobarman", words = ["foo", "bar"]
 
-
+//s = "barfoofoobarthefoobarman", words = ["bar", "foo", "the"]
+s = "lingmindraboofooowingdingbarrwingmonkeypoundcake";
+words = ["fooo", "barr", "wing", "ding", "wing"]
 
 var findSubstring = function (s, words) {
 
-    const hash = {};
+    const hash = new Map();
+    const answer = [];
+    for (let i = 0; i < words.length; i++) hash.set(words[i], (hash.get(words[i]) ?? 0) + 1);
 
-    for (let i = 0; i < words.length; i++) {
-        hash[i] = words[i];
-    }
-    const values = Object.values(hash);
-    console.log(values)
-    // console.log(hash);
-    let i = 0;
-
-    while (i < s.length) {
-        let temp = '';
-        for (let j = i; j < words[0].length + i; j++) {
-            temp += s[j];
+    function search(index) {
+        const copy = new Map();
+        let countWords = words.length;
+        for (let [key, value] of hash) {
+            copy.set(key, value);
         }
-        console.log(temp)
-        if (values.includes(temp)) {
-            console.log(' --------  ')
-        }
+        let length = index + words[0].length * words.length
+        while (index < length) {
+            let temp = '';
 
-        i += words[0].length
+            //    console.log(index + ' - index  - ')
+            for (let j = index; j < words[0].length + index; j++) {
+                temp += s[j];
+            }
+            //     console.log(temp + ' - temp')
+
+            if (copy.has(temp) && copy.get(temp) > 0) {
+                copy.set(temp, (copy.get(temp) ?? 0) - 1);
+                countWords -= 1;
+            }
+            index += words[0].length
+        }
+        //   console.log(countWords + ' - countWords')
+        return (countWords === 0);
+    }
+
+    for (let i = 0; i < s.length; i++) {
+        if (search(i)) answer.push(i)
     }
 
 
-    console.log(hash)
+    return answer
 };
 
 
