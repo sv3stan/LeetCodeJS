@@ -17,7 +17,36 @@ startGene = "AACCGGTT", endGene = "AAACGGTA", bank = ["AACCGGTA", "AACCGCTA", "A
 
 
 var minMutation = function (startGene, endGene, bank) {
+    const genBank = new Set(bank);
+    console.log(genBank)
+    if (!genBank.has(endGene)) {
+        return -1;
+    }
 
+    const mutations = ['A', 'C', 'G', 'T'];
+    const queue = [[startGene, 0]];
+
+    while (queue.length > 0) {
+        const [current, mutationsCount] = queue.shift();
+
+        if (current === endGene) {
+            return mutationsCount;
+        }
+
+        for (let i = 0; i < current.length; i++) {
+            for (const item of mutations) {
+                if (item !== current[i]) {
+                    const newGene = current.slice(0, i) + item + current.slice(i + 1);
+                    if (genBank.has(newGene)) {
+                        queue.push([newGene, mutationsCount + 1]);
+                        genBank.delete(newGene); // Помечаем мутацию как посещенную
+                    }
+                }
+            }
+        }
+    }
+
+    return -1; // Если не удалось найти мутацию
 };
 
 
