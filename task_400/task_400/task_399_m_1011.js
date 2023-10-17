@@ -14,6 +14,30 @@ weights = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], days = 5
 
 var shipWithinDays = function (weights, days) {
 
+    let left = Math.max(...weights);
+    let right = weights.reduce((acc, curr) => acc + curr);
+
+    while (left < right) {
+        let middle = left + ((right - left) >> 1);
+        let count = 1;
+        let sum = 0;
+
+        for (let weight of weights) {
+            if (sum + weight > middle) {
+                count++;
+                sum = 0;
+            }
+            sum += weight;
+        }
+
+        if (count <= days) {
+            right = middle;
+        } else {
+            left = middle + 1;
+        }
+    }
+
+    return left;
 
 
 };
