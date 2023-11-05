@@ -30,6 +30,22 @@ node2.right = node4;
 
 
 var findMode = function (root) {
-    console.log(root)
+
+    const hash = new Map();
+
+    function dfs(node) {
+        if (node === null) return null;
+        if (node.val !== null) hash.set(node.val, (hash.get(node.val) || 0) + 1);
+        dfs(node.left);
+        dfs(node.right);
+    }
+
+    dfs(root);
+    const count = Math.max(...hash.values());
+    const nums = [];
+    for (const [key, values] of hash.entries()) if (values === count) nums.push(key);
+
+    return nums;
+
 };
 console.log(findMode(root))
