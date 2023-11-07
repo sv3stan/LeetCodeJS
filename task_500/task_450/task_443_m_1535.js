@@ -9,43 +9,56 @@
 
 arr = [2, 1, 3, 5, 4, 6, 7], k = 2
 
-var getWinner = function (arr, k) {
+//arr = [1, 11, 22, 33, 44, 55, 66, 77, 88, 99], k = 1000000000
 
+var getWinner = function (arr, k) {
+    if (k === 1) return Math.max(arr[0], arr[1]);
+    if (k >= arr.length) return Math.max(...arr);
+
+    let winner = arr[0];
     let count = 0;
 
-    let winnerPrev = Math.max(arr[0], arr[1]);
-    let loss = 0;
-    while (count < k) {
-        let winner = 0;
-        if (arr[0] > arr[1]) {
-            loss = arr.splice(1, 1);
-            arr = [...arr, ...loss];
-            winner = arr[0];
-        } else {
-            loss = arr.shift(arr);
-            arr.push(loss);
-            winner = arr[1];
-        }
-
-        console.log(arr)
-        console.log(winner + ' - winner - ' + winnerPrev + ' - winnerPrev')
-
-        if (winner === winnerPrev) {
+    for (let i = 1; i < arr.length; i++) {
+        if (winner > arr[i]) {
             count++;
         } else {
-            count = 0;
+            winner = arr[i];
+            count = 1;
         }
 
-        console.log(count)
-
-        winnerPrev = winner;
+        if (count === k) return winner;
     }
 
-    return winnerPrev;
-    // const loss = arr.splice(1, 1);
-    // console.log(loss)
-    // arr = [...arr, ...loss];
-    // console.log(arr)
+    return winner;
+
+    // let count = 1;
+    // let winner = 0;
+    // let loss = 0;
+
+    // while (count < k) {
+
+    //     if (arr[0] > arr[1]) {
+    //         if (winner === arr[0]) {
+    //             count++
+    //         } else {
+    //             winner = arr[0];
+    //             count = 1;
+    //         }
+    //         loss = arr.splice(1, 1);
+    //         arr = [...arr, ...loss];
+    //     } else {
+    //         if (winner === arr[1]) {
+    //             count++
+    //         } else {
+    //             winner = arr[1];
+    //             count = 1;
+    //         }
+    //         loss = arr.shift();
+    //         arr.push(loss);
+    //     }
+    // }
+
+    // return winner;
 
 };
 
