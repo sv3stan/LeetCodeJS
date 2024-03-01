@@ -31,21 +31,47 @@ node1.right = node4;
 
 
 var diameterOfBinaryTree = function (root) {
-    let answer = 0;
-    function getHeightTree(node) {
-        if (node == null) return 0;
 
-        const leftHeight = getHeightTree(node.left);
-        const rightHeight = getHeightTree(node.right);
+    let max = 0;
 
-        //const longestPath = leftHeight + rightHeight;
-        answer = Math.max(answer, leftHeight + rightHeight)
-        //const result = Math.max(leftHeight, rightHeight) + 1;
-        return Math.max(leftHeight, rightHeight) + 1;
+    function dfs(node) {
+        if (node === null) return 0;
+
+        const leftMax = dfs(node.left);
+        const rightMax = dfs(node.right);
+        max = Math.max(max, leftMax + rightMax)
+        return Math.max(leftMax, rightMax) + 1;
     }
-    //console.log(root)
-    getHeightTree(root);
-    return answer;
+
+    dfs(root);
+    return max;
+
 };
 
 console.log(diameterOfBinaryTree(root))
+
+
+
+
+
+
+
+
+
+
+
+// let answer = 0;
+// function getHeightTree(node) {
+//     if (node == null) return 0;
+
+//     const leftHeight = getHeightTree(node.left);
+//     const rightHeight = getHeightTree(node.right);
+
+//     //const longestPath = leftHeight + rightHeight;
+//     answer = Math.max(answer, leftHeight + rightHeight)
+//     //const result = Math.max(leftHeight, rightHeight) + 1;
+//     return Math.max(leftHeight, rightHeight) + 1;
+// }
+// //console.log(root)
+// getHeightTree(root);
+// return answer;
