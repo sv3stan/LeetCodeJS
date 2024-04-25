@@ -1,0 +1,12 @@
+﻿# Исключить временные файлы
+*.tmp
+*.json
+
+.prettier.rc
+# Исключить файлы конфигурации
+config.js
+config.mjs
+
+
+# Исключить директории node_modules
+node_modules/
