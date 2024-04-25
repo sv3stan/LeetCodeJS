@@ -2,10 +2,10 @@
 *.tmp
 *.json
 
-.prettier.rc
+.prettierrc
 # Исключить файлы конфигурации
 config.js
-config.mjs
+eslint.config.mjs
 
 
 # Исключить директории node_modules
