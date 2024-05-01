@@ -33,6 +33,8 @@ var destination = 2;
     (source = 0),
     (destination = 5);
 
+for (let i = 0; i < 10; i--) {}
+
 var validPath = function (n, edges, source, destination) {
     if (edges.length === 1) {
         return true;
