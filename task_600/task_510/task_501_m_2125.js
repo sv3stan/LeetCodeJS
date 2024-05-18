@@ -14,8 +14,8 @@
 
 bank = ["011001", "000000", "010100", "001000"]
 
-var numberOfBeams = function (bank) {
-    let prevCount = 0;
+let numberOfBeams = function (bank) {
+    let prevCount = 0
     let answer = 0;
 
     const calc = (s) => {

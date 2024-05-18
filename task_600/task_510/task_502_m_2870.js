@@ -11,7 +11,7 @@
 
 nums = [2, 3, 3, 2, 2, 4, 2, 3, 4];
 
-var minOperations = function (nums) {
+let minOperations = function (nums) {
 
     const hash = new Map();
 
