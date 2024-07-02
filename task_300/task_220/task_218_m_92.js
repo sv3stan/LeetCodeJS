@@ -8,18 +8,31 @@ function ListNode(val, next) {
     this.val = val === undefined ? 0 : val;
     this.next = next === undefined ? null : next;
 }
-left = 1;
-right = 2;
+let left = 1;
+let right = 2;
 let head = new ListNode(
     1,
-    new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, new ListNode(6, new ListNode(7, new ListNode(8, new ListNode(9, null))))))))
+    new ListNode(
+        2,
+        new ListNode(
+            3,
+            new ListNode(
+                4,
+                new ListNode(
+                    5,
+                    new ListNode(
+                        6,
+                        new ListNode(7, new ListNode(8, new ListNode(9, null))),
+                    ),
+                ),
+            ),
+        ),
+    ),
 );
 
 head = new ListNode(3, new ListNode(5, null));
 
-var reverseBetween = function (head, left, right) {
-
-
+let reverseBetween = function (head, left, right) {
     if (!head || left === right) {
         return head;
     }
@@ -33,7 +46,6 @@ var reverseBetween = function (head, left, right) {
         prevNode = currentNode;
         currentNode = currentNode.next;
     }
-
 
     for (let i = left; i < right; i++) {
         let temp = currentNode.next;
@@ -90,21 +102,20 @@ console.log(reverseBetween(head, left, right));
 
 // return head;
 
-
-    //  vjt решение не верно, потому что не правильно понял задание
-    //  if (!head || left === right) {
-    //     return head;
-    // }
-    // let currentNode = head;
-    // for (let i = 0; i < left - 1; i++) {
-    //     currentNode = currentNode.next;
-    // }
-    // let leftNode = currentNode;
-    // for (let i = left; i < right; i++) {
-    //     currentNode = currentNode.next;
-    // }
-    // let rightNode = currentNode;
-    // const temp = leftNode.val;
-    // leftNode.val = rightNode.val;
-    // rightNode.val = temp;
-    // return head;
+//  vjt решение не верно, потому что не правильно понял задание
+//  if (!head || left === right) {
+//     return head;
+// }
+// let currentNode = head;
+// for (let i = 0; i < left - 1; i++) {
+//     currentNode = currentNode.next;
+// }
+// let leftNode = currentNode;
+// for (let i = left; i < right; i++) {
+//     currentNode = currentNode.next;
+// }
+// let rightNode = currentNode;
+// const temp = leftNode.val;
+// leftNode.val = rightNode.val;
+// rightNode.val = temp;
+// return head;
