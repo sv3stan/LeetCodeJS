@@ -4,26 +4,27 @@
 Ваш результат не должен содержать скобок.
 */
 
-let s = 'f(ul)ao(t(y)qbn)()sj';
+let s = '(ed(et(oc))el)';
 
 let reverseParentheses = function (s) {
     const stack = [];
-    const char = s.split('');
 
+    const char = s.split('');
     for (let i = 0; i < char.length; i++) {
         if (char[i] === '(') {
             stack.push(i);
         } else if (char[i] === ')') {
             const start = stack.pop();
             const end = i;
-            // Reverse the substring within the parentheses
             const temp = char.slice(start + 1, end).reverse();
-            // Replace the original substring with the reversed one
-            char.splice(start, end - start + 1, ...temp);
-        }
-    }
 
-    // Join the array into a string and remove any remaining parentheses
+            console.log('🚀 ~ reverseParentheses ~ temp:', temp);
+
+            char.splice(start, end - start + 1, ...temp);
+            i = 0;
+        }
+        console.log('🚀 ~ reverseParentheses ~ stack:', stack);
+    }
     return char.filter(c => c !== '(' && c !== ')').join('');
 };
 

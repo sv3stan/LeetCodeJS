@@ -12,17 +12,31 @@ let matrix = [
 let luckyNumbers = function (matrix) {
     const m = matrix[0].length;
     const n = matrix.length;
+    let min = 0;
     const res = [];
 
-    for (let i = 0; i < m; i++) {
-        let min = Math.min(...matrix[i]);
-        let max = 0;
-        for (let j = 0; j < n; j++) {
-            if (max < matrix[j][i]) {
-                max = matrix[j][i];
+    for (let i = 0; i < n; i++) {
+        min = Math.min(...matrix[i]);
+
+        // console.log(min);
+
+        for (let j = 0; j < m; j++) {
+            let max = 0;
+
+            for (let k = 0; k < n; k++) {
+                // console.log(k + ' k ');
+                // console.log(j + ' j ');
+                // console.log('🚀 ~ luckyNumbers ~ matrix[i][j]:', matrix[k][j]);
+
+                if (max < matrix[k][j]) {
+                    max = matrix[k][j];
+                }
+
+                // console.log('🚀 ~ luckyNumbers ~ max:', max);
+                // console.log('🚀 ~ luckyNumbers ~ min[i]:', min[k]);
             }
 
-            if (min > max) {
+            if (min >= max) {
                 res.push(min);
             }
         }
