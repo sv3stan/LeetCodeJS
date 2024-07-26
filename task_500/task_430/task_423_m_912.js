@@ -1,64 +1,74 @@
-﻿// Дан массив целых чисел nums, отсортируйте 
+﻿// Дан массив целых чисел nums, отсортируйте
 // его в порядке возрастания и верните его.
-// Вы должны решить задачу без использования 
-// каких - либо встроенных функций с временной 
-// сложностью O(nlog(n)) и с минимально возможной 
+// Вы должны решить задачу без использования
+// каких - либо встроенных функций с временной
+// сложностью O(nlog(n)) и с минимально возможной
 // пространственной сложностью.
 // 912
 
-nums = [5, 1, 1, 2, 0, 0]
+nums = [5, 1, 1, 2, 0, 0];
 
-var sortArray = function (nums) {
-
-
-
-    const stack = [{ left: 0, right: nums.length - 1 }];
-    console.log(stack)
-    while (stack.length) {
-        const { left, right } = stack.pop();
-
-        if (left >= right) continue;
-
-        let pivot = nums[right];
-        let i = left - 1;
-
-        for (let j = left; j < right; j++) {
-            if (nums[j] < pivot) {
+let sortArray = function (nums) {
+    function merge(left, right) {
+        const res = [];
+        let i = 0;
+        let j = 0;
+        while (i < left.length && j < right.length) {
+            if (left[i] < right[j]) {
+                res.push(left[i]);
                 i++;
-                [nums[i], nums[j]] = [nums[j], nums[i]];
+            } else {
+                res.push(right[j]);
+                j++;
             }
         }
-
-        [nums[i + 1], nums[right]] = [nums[right], nums[i + 1]];
-
-        stack.push({ left, right: i });
-        stack.push({ left: i + 2, right });
+        while (i < left.length) {
+            res.push(left[i]);
+            i++;
+        }
+        while (j < right.length) {
+            res.push(right[j]);
+            j++;
+        }
+        return res;
     }
-
-    return nums;
-
-
-
+    const len = nums.length;
+    if (len < 2) {
+        return [...nums];
+    } else {
+        const middle = Math.floor(len / 2);
+        const left = sortArray(nums.slice(0, middle));
+        const right = sortArray(nums.slice(middle));
+        return merge(left, right);
+    }
 };
 
+console.log(sortArray(nums));
 
-console.log(sortArray(nums))
+// const stack = [{ left: 0, right: nums.length - 1 }];
+// console.log(stack)
+// while (stack.length) {
+//     const { left, right } = stack.pop();
 
+//     if (left >= right) continue;
 
+//     let pivot = nums[right];
+//     let i = left - 1;
 
+//     for (let j = left; j < right; j++) {
+//         if (nums[j] < pivot) {
+//             i++;
+//             [nums[i], nums[j]] = [nums[j], nums[i]];
+//         }
+//     }
 
+//     [nums[i + 1], nums[right]] = [nums[right], nums[i + 1]];
 
+//     stack.push({ left, right: i });
+//     stack.push({ left: i + 2, right });
+// }
 
-
-
-
-
-
-
-
-
-
-
+// return nums;
 
 // if (nums.length <= 1) {
 //     return nums;
