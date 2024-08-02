@@ -8,20 +8,32 @@
 s = 'ABFCACDB';
 
 let minLength = function (s) {
-    const chars = s.split('');
-    let i = 0;
-    while (i < chars.length) {
-        if (chars[i] === 'A' && chars[i + 1] === 'B') {
-            chars.splice(i, 2);
-            i = 0;
-        } else if (chars[i] === 'C' && chars[i + 1] === 'D') {
-            chars.splice(i, 2);
-            i = 0;
-        } else {
+    // const chars = s.split('');
+    // let i = 0;
+    // while (i < chars.length) {
+    //     if (chars[i] === 'A' && chars[i + 1] === 'B') {
+    //         chars.splice(i, 2);
+    //         i = 0;
+    //     } else if (chars[i] === 'C' && chars[i + 1] === 'D') {
+    //         chars.splice(i, 2);
+    //         i = 0;
+    //     } else {
+    //         i++;
+    //     }
+    // }
+    // return chars.length;
+
+    const stack = [];
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === 'A' && s[i + 1] === 'B') {
             i++;
+        } else if (s[i] === 'C' && s[i + 1] === 'D') {
+            i++;
+        } else {
+            stack.push(s[i]);
         }
-    }
-    return chars.length;
+
+    
 };
 
 console.log(minLength(s)); // Output: 6
